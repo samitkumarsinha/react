@@ -1,0 +1,32 @@
+dataservice
+--------------
+import { useState, useEffect } from "react";
+const UserData = (url) => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    fetch(url)
+      .then((items) => items.json())
+      .then((data) => setData(data));
+  }, [url]);
+  return [data];
+};
+export default UserData;
+----------------
+call dataservice
+
+import "./App.css";
+import Userlist from "./components/Userlist";
+import UserData from "./Dataservice";
+function App() {
+  const [data] = UserData('https://jsonplaceholder.typicode.com/users')
+  const records =  data.map((items, key) => {
+    return <Userlist key={key} data={items} />;
+  })
+  return (
+    <>
+      {records}
+    </>
+  );
+}
+export default App;
+------------------------
