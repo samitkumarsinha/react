@@ -30,3 +30,6 @@ function App() {
 }
 export default App;
 ------------------------
+inline style
+<div style={{ 'color': 'red', 'fontWeight': 'bold'}}>{recs.data.name}</div>
+------------------------
