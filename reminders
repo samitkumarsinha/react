@@ -44,3 +44,9 @@ function Userlist(recs){
             <div style={{ 'color': 'red', 'fontWeight': 'bold'}}>{recs.data.name}</div>
             <div onClick={()=>show(recs.data.email)}>{recs.data.email}</div>
 ------------------------
+pass object
+   function show(v){
+        console.log(v.data.id)
+    }
+<div onClick={()=>show(recs)}>{recs.data.email}</div>
+------------------------
