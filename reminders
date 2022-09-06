@@ -76,3 +76,12 @@ function Test1(){
     )
 }
 -----------------------------------------
+ const showval = (e) => {
+        console.log(e.target.value)
+    }
+ -----
+ <input onChange={showval.bind(this)}></input>
+ 
+ ----------------------------------------------
+ 
+ 
