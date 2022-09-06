@@ -50,3 +50,29 @@ pass object
     }
 <div onClick={()=>show(recs)}>{recs.data.email}</div>
 ------------------------
+event
+function Test1(){
+    const add = (val) => {
+        console.log(val.target.innerHTML)
+    }
+    const div = (x) => {
+        return x/10;
+    }
+    const showval = (e) => {
+        console.log(e)
+    }
+    const myelem = (
+        <>
+            <h1 onClick={(e)=>add(e)}>Hi..{div(7)}</h1>
+            <p style={{'fontSize': '20px', 'color': 'blue'}}>test style</p>
+            <input onChange={(e) => showval(e.target.value)}></input>
+        </>
+    )
+    return (
+        <>
+           {myelem}
+           {myelem}
+        </>
+    )
+}
+-----------------------------------------
