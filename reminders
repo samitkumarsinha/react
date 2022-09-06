@@ -33,3 +33,14 @@ export default App;
 inline style
 <div style={{ 'color': 'red', 'fontWeight': 'bold'}}>{recs.data.name}</div>
 ------------------------
+pass value to function
+
+function Userlist(recs){
+ function show(v){
+        console.log(v)
+    }
+    return (
+        <>
+            <div style={{ 'color': 'red', 'fontWeight': 'bold'}}>{recs.data.name}</div>
+            <div onClick={()=>show(recs.data.email)}>{recs.data.email}</div>
+------------------------
