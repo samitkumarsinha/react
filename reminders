@@ -83,5 +83,27 @@ function Test1(){
  <input onChange={showval.bind(this)}></input>
  
  ----------------------------------------------
- 
- 
+without useeffect
+import { useState } from "react";
+import "./Test2.css";
+function Test2() {
+  const [x, setx] = useState([]);
+  async function getdata() {
+    await fetch("https://jsonplaceholder.typicode.com/users")
+      .then((item) => item.json())
+      .then((data) => setx(data));
+  }
+  return (
+    <>
+      <button onClick={() => getdata()}>click</button>
+      {x.map((items, key) => (
+        <div key={key}>
+          <p>{items.id}</p>
+          <p> {items.name}</p>
+        </div>
+      ))}
+    </>
+  );
+}
+export default Test2;
+--------------------------------------------------------
