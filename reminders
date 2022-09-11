@@ -175,6 +175,7 @@ function Testform() {
     gender: ""
   };
   const [inputs, setInputs] = useState(initialValues);
+  const [showdata, setshowdata] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -184,9 +185,11 @@ function Testform() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(inputs);
+    setshowdata(true);
   };
 
   return (
+     { (showdata === true) ? <p>{inputs.username}</p>:<></>}
     <form onSubmit={handleSubmit}>
       <label>
         Enter your name:
