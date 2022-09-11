@@ -165,3 +165,60 @@ const Testform = () => {
 
 export default Testform;
 --------------------------------------------------------
+use this way to handle multiple inputs
+import { useState } from "react";
+
+function Testform() {
+  const initialValues = {
+    username: "",
+    age: "",
+    gender: ""
+  };
+  const [inputs, setInputs] = useState(initialValues);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setInputs({ ...inputs, [name]: value });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(inputs);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        Enter your name:
+        <input
+          type="text"
+          name="username"
+          value={inputs.username}
+          onChange={handleChange}
+        />
+      </label>
+      <label>
+        Enter your age:
+        <input
+          type="text"
+          name="age"
+          value={inputs.age}
+          onChange={handleChange}
+        />
+      </label>
+      <label>
+        Enter your gender:
+        <input
+          type="text"
+          name="gender"
+          value={inputs.gender}
+          onChange={handleChange}
+        />
+      </label>
+      <input type="submit" />
+    </form>
+  );
+}
+
+export default Testform;
+------------------------------------------------------
