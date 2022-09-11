@@ -107,3 +107,61 @@ function Test2() {
 }
 export default Test2;
 --------------------------------------------------------
+form input
+import { useState, useRef } from "react";
+
+const Testform = () => {
+  const [message, setMessage] = useState("");
+  const [message1, setMessage1] = useState("");
+  let username, password;
+  const inputRef = useRef('');
+  const handleChange = (event) => {
+    console.log(event.target.type)
+    let src = (event.target.name)
+    if(src === 'username') username = event.target.value;
+    if(src === 'password') password = event.target.value;
+  };
+
+  const handleClick = (event) => {
+    event.preventDefault();
+    setMessage(username);
+    setMessage1(password);
+    console.log(inputRef.current.value);
+  };
+
+  return (
+    <div>
+      <div><input
+        type="text"
+        name="username"
+        onChange={handleChange}
+        autoComplete="off"
+      />
+      </div>
+      <div><input
+        type="text"
+        name="password"
+        onChange={handleChange}
+        autoComplete="off"
+      />
+      </div>
+      <div><input
+        type="text"
+        ref={inputRef}
+        name="unit"
+        onChange={handleChange}
+        autoComplete="off"
+      />
+      </div>
+
+      <p>Message: {message}</p>
+      <p>Message1: {message1}</p>
+      <p>Message2: {inputRef.current.value}</p>
+
+      <button onClick={handleClick}>Click</button>
+    </div>
+  );
+};
+
+export default Testform;
+--------------------------------------------------------
