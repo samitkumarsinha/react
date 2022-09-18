@@ -1,0 +1,42 @@
+app.js
+-----
+import React from 'react';
+import Newscontent from './components/newscontent';
+class App extends React.Component{
+  async componentDidMount(){
+    let news = await fetch('https://newsapi.org/v2/top-headlines?country=us&apiKey=0afa19496e574ecb8e58cb3d98673ad8');
+    let parseData = await news.json();
+    console.log(parseData.articles)
+    this.setState({articles : parseData.articles });
+  }
+  render(){
+    return (
+      <div>
+        {
+          this.state?.articles?.map((item, key)=> {
+            return <div key={key}><Newscontent articles={item} /></div>
+          })
+        }
+      </div>
+    );
+  }
+}
+export default App;
+---------------
+newscontent.js
+---------------
+import React, { Component } from 'react';
+export default class Newscontent extends Component {
+  render() {
+    return (
+      <div>
+        <div>{this.props.articles.title}</div>
+        <div>
+            <img src = {this.props.articles.urlToImage} alt='' width="200" height="200"  />
+        </div>
+      </div>
+     
+    )
+  }
+}
+---------------------------------------------
