@@ -89,6 +89,7 @@ refactoring
 import React from 'react';
 import Newscontent from './components/newscontent';
 class App extends React.Component{
+  max_limit;
   constructor(){
     super();
     this.backhandler = this.backhandler.bind(this);
@@ -97,8 +98,9 @@ class App extends React.Component{
   async getNews(page=1){
     let news = await fetch(`https://newsapi.org/v2/top-headlines?country=us&apiKey=0afa19496e574ecb8e58cb3d98673ad8&page=${page}`);
     let parseData = await news.json();
-    console.log(page)
-    this.setState({articles : parseData.articles, page: page });
+    console.log(parseData)
+    this.setState({articles : parseData.articles, page: page, total_pages: parseData.totalResults  });
+    this.max_limit = Math.ceil(this.state?.total_pages / this.state?.articles.length)
   }
   async componentDidMount(page){
     this.getNews(1);
@@ -121,9 +123,10 @@ class App extends React.Component{
             return <div key={key}><Newscontent articles={item} /></div>
           })
         }
+        {console.log('.........',this.max_limit)}
         <div>
-          <button onClick = {this.backhandler}>Back</button>
-          <button onClick = {this.forwardhandler}>Forward</button>
+          <button disabled={this.state?.page <= 1 } onClick = {this.backhandler}>Back</button>
+          <button disabled={this.state?.page >= this.max_limit } onClick = {this.forwardhandler}>Forward</button>
         </div>
       </div>
     );
