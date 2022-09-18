@@ -40,3 +40,48 @@ export default class Newscontent extends Component {
   }
 }
 ---------------------------------------------
+navigation
+import React from 'react';
+import Newscontent from './components/newscontent';
+class App extends React.Component{
+  constructor(){
+    super();
+    this.backhandler = this.backhandler.bind(this);
+    this.forwardhandler = this.forwardhandler.bind(this);
+  }
+  async componentDidMount(){
+    let news = await fetch('https://newsapi.org/v2/top-headlines?country=us&apiKey=0afa19496e574ecb8e58cb3d98673ad8');
+    let parseData = await news.json();
+    console.log(parseData.articles)
+    this.setState({articles : parseData.articles, page: 1 });
+  }
+  async backhandler(){
+    let news = await fetch(`https://newsapi.org/v2/top-headlines?country=us&apiKey=0afa19496e574ecb8e58cb3d98673ad8&page=${this.state.page - 1}`);
+    let parseData = await news.json();
+    this.setState({articles : parseData.articles, page: parseInt(this.state.page) - 1 });
+    console.log('back', parseInt(this.state.page) - 1)
+  }
+  async forwardhandler(){
+    let news = await fetch(`https://newsapi.org/v2/top-headlines?country=us&apiKey=0afa19496e574ecb8e58cb3d98673ad8&page=${this.state.page + 1}`);
+    let parseData = await news.json();
+    this.setState({articles : parseData.articles, page: parseInt(this.state.page) + 1 });
+    console.log('fwd', parseInt(this.state.page) + 1)
+  }
+  render(){
+    return (
+      <div>
+        {
+          this.state?.articles?.map((item, key)=> {
+            return <div key={key}><Newscontent articles={item} /></div>
+          })
+        }
+        <div>
+          <button onClick = {this.backhandler}>Back</button>
+          <button onClick = {this.forwardhandler}>Forward</button>
+        </div>
+      </div>
+    );
+  }
+}
+export default App;
+------------------------------------
