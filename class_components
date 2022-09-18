@@ -85,3 +85,49 @@ class App extends React.Component{
 }
 export default App;
 ------------------------------------
+refactoring
+import React from 'react';
+import Newscontent from './components/newscontent';
+class App extends React.Component{
+  constructor(){
+    super();
+    this.backhandler = this.backhandler.bind(this);
+    this.forwardhandler = this.forwardhandler.bind(this);
+  }
+  async getNews(page=1){
+    let news = await fetch(`https://newsapi.org/v2/top-headlines?country=us&apiKey=0afa19496e574ecb8e58cb3d98673ad8&page=${page}`);
+    let parseData = await news.json();
+    console.log(page)
+    this.setState({articles : parseData.articles, page: page });
+  }
+  async componentDidMount(page){
+    this.getNews(1);
+  }
+  async backhandler(){
+    this.state.page --;
+    this.getNews(this.state.page);
+    console.log('back', this.state.page)
+  }
+  async forwardhandler(){
+    this.state.page ++;
+    this.getNews(this.state.page);
+    console.log('fwd', this.state.page)
+  }
+  render(){
+    return (
+      <div>
+        {
+          this.state?.articles?.map((item, key)=> {
+            return <div key={key}><Newscontent articles={item} /></div>
+          })
+        }
+        <div>
+          <button onClick = {this.backhandler}>Back</button>
+          <button onClick = {this.forwardhandler}>Forward</button>
+        </div>
+      </div>
+    );
+  }
+}
+export default App;
+----------------------------------------
