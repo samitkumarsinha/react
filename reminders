@@ -225,3 +225,35 @@ function Testform() {
 
 export default Testform;
 ------------------------------------------------------
+multiple input fields class component
+import React from "react";
+export default class Home extends React.Component{
+    constructor(){
+        super();
+        this.state = {'val': 0, 'val1': 0, 'sum': 0}
+    }
+    sum = () => {
+        let f = parseFloat(this.state.val);
+        let s = parseFloat(this.state.val1);
+        this.setState({'sum': f+s})
+    }
+    inputHandler = (event) => {
+        this.setState({[event.target.name] : event.target.value})
+    }
+    handleSubmit = (event) => {
+        event.preventDefault();
+    }
+    render(){
+        return (
+            <div>
+               <form onSubmit={(event) => this.handleSubmit(event)}>
+                    <input name="val"  type="text"  onChange={this.inputHandler}></input><br/>
+                    <input name="val1" type="text"  onChange={this.inputHandler}></input><br/>
+                    <button onClick={this.sum}>sum</button><br />
+                    {this.state.sum}
+               </form>
+            </div>
+        )
+    }
+}
+-----------------------------------------
