@@ -307,6 +307,7 @@ export default class Home extends React.Component {
               <br />
             </div>
           ))}
+          <button onClick={this.inputHandlerchk}>click</button>
         </form>
       </div>
     );
@@ -354,13 +355,14 @@ export default class Home extends React.Component {
               <input
                 onChange={this.inputHandlerchk}
                 value={elem.id}
-                type="radio"
+                type="checkbox"
                 name="same"
               />
               {elem.value}
               <br />
             </div>
           ))}
+          <button onClick={this.inputHandlerchk}>click</button>
         </form>
       </div>
     );
