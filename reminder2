@@ -26,6 +26,7 @@ export default class A extends React.Component {
         {this.state.data.map((item, key) => (
           <div key={key}>
             <B data={item} mydata={(event)=>this.setdata(event)}></B>
+             {/*  <B data={item} mydata={this.setdata.bind(this)}></B> */}
           </div>
         ))}
         <div>
