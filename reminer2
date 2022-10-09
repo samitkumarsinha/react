@@ -1,0 +1,68 @@
+pass data from child to parent
+---------------------------------
+a.js (parent)
+import React from 'react';
+import B from './b';
+export default class A extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [
+        { id: 1, name: 'samit', address: 'kk1' },
+        { id: 2, name: 'ravi', address: 'kk2' },
+        { id: 3, name: 'ramesh', address: 'kk3' },
+        { id: 4, name: 'tony', address: 'kk4' },
+      ],
+      address: ''
+    };
+  }
+  setdata(data){
+    console.log(data)
+    this.setState({address: data})
+  }
+  render() {
+    return (
+      <div>
+        {this.state.data.map((item, key) => (
+          <div key={key}>
+            <B data={item} mydata={(event)=>this.setdata(event)}></B>
+          </div>
+        ))}
+        <div>
+          {this.state.address}
+        </div>
+      </div>
+    );
+  }
+}
+-----------------
+b.js (child)
+
+import React from 'react';
+import './b.css';
+export default class B extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log(props);
+    this.state = {
+      address: ''
+    }
+  }
+  showadd(item) {
+    console.log(this.props)
+    this.props.mydata(item.address)
+    this.setState(
+      {
+        address: item.address
+      }
+    )
+  }
+  render() {
+    return (
+      <div onClick={()=>this.showadd(this.props.data)}>
+        <span>{this.props.data.id}.</span> &nbsp;<span>{this.props.data.name}</span>
+      </div>
+    );
+  }
+}
+-------------------------------------------------------------------------------------------------
