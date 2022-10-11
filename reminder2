@@ -59,3 +59,53 @@ export default class B extends React.Component {
   }
 }
 -------------------------------------------------------------------------------------------------
+context
+
+test.js (provider)
+import React, {createContext} from 'react';
+import C from './c';
+export const firstname = createContext('');
+export default class Test extends React.Component{
+    constructor(){
+        super();
+    }
+    render(){
+        return(
+            <div>  
+                <firstname.Provider value={'v'}><C/></firstname.Provider>
+            </div>
+        )
+    }
+
+}
+-------------------------------------
+c.js (consumer)
+
+import React from "react";
+import {firstname} from "./test";
+export default class C extends React.Component {
+  constructor() {
+    super();
+    console.log('')
+  }
+  render() {
+    return (
+      <div>
+        <firstname.Consumer>
+        {
+          (data)=>{
+            return (
+              <>
+                <p>test {data}</p>
+              </>
+            )
+          }
+        }
+        </firstname.Consumer>
+      </div>
+    );
+  }
+}
+-------------------------------------------------------------------
+
+
