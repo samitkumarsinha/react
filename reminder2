@@ -107,5 +107,29 @@ export default class C extends React.Component {
   }
 }
 -------------------------------------------------------------------
-
+useref
+import React from "react";
+export default class B extends React.Component {
+  constructor() {
+    super();
+    this.textinput = React.createRef();
+  }
+  setval(){
+    let val = this.textinput.current.value;
+    // document.getElementById('mylab').innerHTML=val;
+    document.querySelector('#mylab').innerHTML = val;
+    this.textinput.current.value = '';
+    this.textinput.current.focus();
+  }
+  render() {
+    return (
+      <div>
+        <input type="text" ref={this.textinput}></input>
+        <button onClick={this.setval.bind(this)}>Click</button>
+        <label id="mylab"></label>
+      </div>
+    );
+  }
+}
+--------------------------------------------------------------------------
 
