@@ -132,4 +132,27 @@ export default class B extends React.Component {
   }
 }
 --------------------------------------------------------------------------
+without useref
+import React from "react";
+export default class B extends React.Component {
+  constructor() {
+    super();
+    console.log('')
+  }
+  setval(){
+    let val = document.querySelector('#mytext').value;
+    // document.getElementById('mylab').innerHTML=val;
+    document.querySelector('#mylab').innerHTML = val;
+  }
+  render() {
+    return (
+      <div>
+        <input type="text" id="mytext"></input>
+        <button onClick={this.setval.bind(this)}>Click</button>
+        <label id="mylab"></label>
+      </div>
+    );
+  }
+}
+---------------------------------------------------------------------------
 
