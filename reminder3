@@ -18,8 +18,9 @@ export default function A() {
       <p><input  {...register("username",{ required: true })} /></p>
       {errors.username && <p>{errors.username.message}</p>}
       <p><input {...register("password", { required: true, maxLength: 5 })} /></p>
-      {errors.password?.type === 'max' && <p>{errors.password.message}</p>}
-      {errors.password?.type === 'required' && <p>{errors.password.message}</p>}
+      {/* {errors.password?.type === 'max' && <p>{errors.password.message}</p>}
+      {errors.password?.type === 'required' && <p>{errors.password.message}</p>} */}
+      {errors.password && <p>{errors.password.message}</p>}
       <p>
       <select {...register("gender")}>
         <option value="">select</option>
