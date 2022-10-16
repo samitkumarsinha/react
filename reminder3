@@ -9,6 +9,9 @@ export default function A() {
     gender: yup.string().required('gender required'),
     username: yup.string().required('username required'),
     password: yup.string().required('password required').max(3, 'min 3 chars required'),
+    confpassword: yup.string().required('conf password required')
+                  .max(3, 'min 3 chars required')
+                  .oneOf([yup.ref('password')], 'should match')
   }).required();
   
   const { register, handleSubmit,formState: { errors } } = useForm({resolver: yupResolver(schema)});
@@ -21,6 +24,9 @@ export default function A() {
       {/* {errors.password?.type === 'max' && <p>{errors.password.message}</p>}
       {errors.password?.type === 'required' && <p>{errors.password.message}</p>} */}
       {errors.password && <p>{errors.password.message}</p>}
+    
+      <p><input {...register("confpassword", { required: true, maxLength: 5 })} /></p>
+      {errors.confpassword && <p>{errors.confpassword.message}</p>}
       <p>
       <select {...register("gender")}>
         <option value="">select</option>
