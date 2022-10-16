@@ -1,0 +1,36 @@
+form validator
+------------------------------------------------------------------
+import { useForm } from "react-hook-form";
+import './a.css';
+import * as yup from 'yup';
+import {yupResolver} from '@hookform/resolvers/yup'; 
+export default function A() {
+  const schema = yup.object({
+    gender: yup.string().required('gender required'),
+    username: yup.string().required('username required'),
+    password: yup.string().required('password required').max(3, 'min 3 chars required'),
+  }).required();
+  
+  const { register, handleSubmit,formState: { errors } } = useForm({resolver: yupResolver(schema)});
+  const onSubmit = data => console.log(data);
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <p><input  {...register("username",{ required: true })} /></p>
+      {errors.username && <p>{errors.username.message}</p>}
+      <p><input {...register("password", { required: true, maxLength: 5 })} /></p>
+      {errors.password?.type === 'max' && <p>{errors.password.message}</p>}
+      {errors.password?.type === 'required' && <p>{errors.password.message}</p>}
+      <p>
+      <select {...register("gender")}>
+        <option value="">select</option>
+        <option value="female">female</option>
+        <option value="male">male</option>
+        <option value="other">other</option>
+      </select>
+      </p>
+      {errors.gender && <p>{errors.gender.message}</p>}
+      <input type="submit" />
+    </form>
+  );
+}
+-------------------------------------------------------------------------------------------
