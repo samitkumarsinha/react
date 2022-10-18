@@ -421,3 +421,56 @@ export default class FormTest extends React.Component{
     }
 }
 ------------------------------------------------------------------------
+multiple radio
+import React from 'react';
+export default class FormTest extends React.Component{
+    constructor(){
+        super();
+        this.state = {
+            category: [
+                {id: 1, value: 'high', checked: false},
+                {id: 2, value: 'moderate', checked: false},
+                {id: 3, value: 'low', checked: false}
+            ]
+        }
+    }
+    meth(event){
+        let items = this.state.category;
+        items.forEach(item => {
+            if(item.value === event.target.value){
+                item.checked = event.target.checked;
+                console.warn(item.value, event.target.value,item.checked, event.target.checked);
+            }else{
+                item.checked = false;
+            }
+        });
+        this.setState({
+            category: items
+        });
+    }
+    handlesubmit(event){
+        event.preventDefault();
+        console.log(this.state.category)
+    }
+    render(){
+        return(
+            <form onSubmit={this.handlesubmit.bind(this)}>
+                {
+                    this.state.category.map((item, key) =>(
+                        <div key={key}>
+                            <label>{item.value}</label>
+                            <input 
+                                onChange={this.meth.bind(this)}
+                                type='radio'
+                                name='same' 
+                                value={item.value} 
+                            />
+                        </div>
+                    ))
+                }
+                <button type='submit'>click</button>
+            </form>
+        )
+    }
+}
+--------------------------------------------------------------------------------
