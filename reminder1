@@ -256,120 +256,9 @@ export default class Home extends React.Component{
         )
     }
 }
------------------------------------------
-multiple radio
-import React from "react";
-export default class Home extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      val: 0,
-      val1: 0,
-      sum: 0,
-      chkbox: [
-        { id: 1, value: "chk1", checked: false },
-        { id: 2, value: "chk2", checked: false },
-        { id: 3, value: "chk3", checked: false },
-        { id: 4, value: "chk4", checked: false },
-        { id: 5, value: "chk5", checked: false },
-      ],
-    };
-  }
-  inputHandlerchk = (event) => {
-    let fruites = this.state.chkbox;
-    fruites.forEach((fruite) => {
-      if (fruite.value === "chk" + event.target.value) {
-        fruite.checked = event.target.checked;
-      } else {
-        fruite.checked = false;
-      }
-    });
-    this.setState({ chkbox: fruites });
-  };
-  handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(this.state.chkbox);
-  };
-  render() {
-    return (
-      <div>
-        <form onSubmit={(event) => this.handleSubmit(event)}>
-          <br />
-          {this.state.chkbox.map((elem, key) => (
-            <div key={key}>
-              <input
-                onChange={this.inputHandlerchk}
-                value={elem.id}
-                type="radio"
-                name="same"
-              />
-              {elem.value}
-              <br />
-            </div>
-          ))}
-          <button onClick={this.inputHandlerchk}>click</button>
-        </form>
-      </div>
-    );
-  }
-}
----------------------------------------------------
-multiple checkbox
-import React from "react";
-export default class Home extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      val: 0,
-      val1: 0,
-      sum: 0,
-      chkbox: [
-        { id: 1, value: "chk1", checked: false },
-        { id: 2, value: "chk2", checked: false },
-        { id: 3, value: "chk3", checked: false },
-        { id: 4, value: "chk4", checked: false },
-        { id: 5, value: "chk5", checked: false },
-      ],
-    };
-  }
-  inputHandlerchk = (event) => {
-    let fruites = this.state.chkbox;
-    fruites.forEach((fruite) => {
-      if (fruite.value === "chk" + event.target.value) {
-        fruite.checked = event.target.checked;
-      }
-    });
-    this.setState({ chkbox: fruites });
-  };
-  handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(this.state.chkbox);
-  };
-  render() {
-    return (
-      <div>
-        <form onSubmit={(event) => this.handleSubmit(event)}>
-          <br />
-          {this.state.chkbox.map((elem, key) => (
-            <div key={key}>
-              <input
-                onChange={this.inputHandlerchk}
-                value={elem.id}
-                type="checkbox"
-                name="same"
-              />
-              {elem.value}
-              <br />
-            </div>
-          ))}
-          <button onClick={this.inputHandlerchk}>click</button>
-        </form>
-      </div>
-    );
-  }
-}
+
 ------------------------------------------------------
-multiple checkbox another example
+multiple checkbox example
 
 import React from 'react';
 export default class FormTest extends React.Component{
@@ -451,6 +340,10 @@ export default class FormTest extends React.Component{
     handlesubmit(event){
         event.preventDefault();
         console.log(this.state.category)
+          let res = this.state.category.find(item => {
+            return item.checked === true
+        })
+        console.log(res.value)
     }
     render(){
         return(
