@@ -286,6 +286,10 @@ export default class FormTest extends React.Component{
     handlesubmit(event){
         event.preventDefault();
         console.log(this.state.category)
+         let res = this.state.category.filter(item => {
+            return item.checked === true
+        })
+        console.log(res)
     }
     render(){
         return(
