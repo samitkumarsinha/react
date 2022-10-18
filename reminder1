@@ -369,3 +369,55 @@ export default class Home extends React.Component {
   }
 }
 ------------------------------------------------------
+multiple checkbox another example
+
+import React from 'react';
+export default class FormTest extends React.Component{
+    constructor(){
+        super();
+        this.state = {
+            category: [
+                {id: 1, value: 'high', checked: false},
+                {id: 2, value: 'moderate', checked: false},
+                {id: 3, value: 'low', checked: false}
+            ]
+        }
+    }
+    meth(event){
+        let items = this.state.category;
+        items.forEach(item => {
+            if(item.value === event.target.value){
+                item.checked = event.target.checked;
+            }
+        });
+        this.setState({
+            category: items
+        });
+    }
+    handlesubmit(event){
+        event.preventDefault();
+        console.log(this.state.category)
+    }
+    render(){
+        return(
+            <form onSubmit={this.handlesubmit.bind(this)}>
+                {
+                    this.state.category.map((item, key) =>(
+                        <div key={key}>
+                            <label>{item.value}</label>
+                            <input 
+                                onChange={this.meth.bind(this)}
+                                type='checkbox' 
+                                id={item.id} 
+                                name={item.value} 
+                                value={item.value} 
+                            />
+                        </div>
+                    ))
+                }
+                <button onClick={this.meth.bind(this)}>click</button>
+            </form>
+        )
+    }
+}
+------------------------------------------------------------------------
