@@ -50,6 +50,7 @@ export default class FormTest extends React.Component {
   initialValues = {
     email: "",
     password: "",
+    dtp: false,
   };
   signInSchema = Yup.object().shape({
     email: Yup.string().email().required("Email is required"),
@@ -57,7 +58,14 @@ export default class FormTest extends React.Component {
     password: Yup.string()
       .required("Password is required")
       .min(4, "Password is too short - should be 4 chars minimum"),
+    dtp: Yup.boolean()
+      .required("dtp is required")
+      .oneOf([true], "The terms and conditions must be accepted."),
   });
+  constructor() {
+    super();
+    console.log("");
+  }
   render() {
     return (
       <Formik
@@ -106,7 +114,16 @@ export default class FormTest extends React.Component {
                     className="error"
                   />
                 </div>
-
+                <div className="form-row">
+                  <label htmlFor="password">Password</label>
+                  <Field
+                    type="checkbox"
+                    name="dtp"
+                    id="dtp"
+                    className={errors.dtp && touched.dtp ? "input-error" : null}
+                  />
+                  <ErrorMessage name="dtp" component="span" className="error" />
+                </div>
                 <button
                   type="submit"
                   className={!(dirty && isValid) ? "disabled-btn" : ""}
@@ -122,4 +139,4 @@ export default class FormTest extends React.Component {
     );
   }
 }
---------------------------------------------------------------------------------------
+-------------------------------------------------------
