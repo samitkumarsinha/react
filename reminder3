@@ -140,3 +140,111 @@ export default class FormTest extends React.Component {
   }
 }
 -------------------------------------------------------
+formik yup without field
+import React from "react";
+import "./form_test.css";
+import { Formik, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
+export default class FormTest extends React.Component {
+  initialValues = {
+    email: "",
+    password: "",
+    dtp: false,
+  };
+  signInSchema = Yup.object().shape({
+    email: Yup.string().email().required("Email is required"),
+
+    password: Yup.string()
+      .required("Password is required")
+      .min(4, "Password is too short - should be 4 chars minimum"),
+    dtp: Yup.boolean()
+      .required("dtp is required")
+      .oneOf([true], "The terms and conditions must be accepted."),
+  });
+  constructor() {
+    super();
+    console.log("");
+  }
+  render() {
+    return (
+      <Formik
+        initialValues={this.initialValues}
+        validationSchema={this.signInSchema}
+        onSubmit={(values) => {
+          console.log(values);
+        }}
+      >
+        {(formik) => {
+          const { errors, touched, isValid, dirty, handleChange, values, handleBlur } = formik;
+          return (
+            <div className="container">
+              <h1>Sign in to continue</h1>
+              <Form>
+                <div className="form-row">
+                  <label htmlFor="email">Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    value={values.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={
+                      errors.email && touched.email ? "input-error" : null
+                    }
+                  />
+                  <ErrorMessage
+                    name="email"
+                    component="span"
+                    className="error"
+                  />
+                </div>
+
+                <div className="form-row">
+                  <label htmlFor="password">Password</label>
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    value={values.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={
+                      errors.password && touched.password ? "input-error" : null
+                    }
+                  />
+                  <ErrorMessage
+                    name="password"
+                    component="span"
+                    className="error"
+                  />
+                </div>
+                <div className="form-row">
+                  <label htmlFor="password">Password</label>
+                  <input
+                    type="checkbox"
+                    name="dtp"
+                    id="dtp"
+                    value={values.dtp}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={errors.dtp && touched.dtp ? "input-error" : null}
+                  />
+                  <ErrorMessage name="dtp" component="span" className="error" />
+                </div>
+                <button
+                  type="submit"
+                  className={!(dirty && isValid) ? "disabled-btn" : ""}
+                  disabled={!(dirty && isValid)}
+                >
+                  Sign In
+                </button>
+              </Form>
+            </div>
+          );
+        }}
+      </Formik>
+    );
+  }
+}
+---------------------------------------------------------------------------------------
