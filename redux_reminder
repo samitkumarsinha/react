@@ -1,7 +1,9 @@
 src/actions/index.js
-export const incnumber = () => {
+//export const incnumber = () => {
+export const incnumber = (num) => { -------------for payload
   return {
     type: "INCREMENT",
+    payload: num
   };
 };
 export const decnumber = () => {
@@ -23,7 +25,8 @@ const initialstate = 0;
 const changenumber = (state = initialstate, action) => {
   switch (action.type) {
     case "INCREMENT":
-      return state + 1;
+      //return state + 1;
+      return state + action.payload;------for payload
     case "DECREMENT":
       return state - 1;
     default:
@@ -44,6 +47,7 @@ function App() {
   return (
     <div className="panel">
       <button onClick={() => dispatch(incnumber())}>increment</button>
+      <button onClick={() => dispatch(incnumber(5))}>increment</button>-----send param as payload
       <label>{changenumber}</label>
       <button onClick={() => dispatch(decnumber())}>decrement</button>
     </div>
