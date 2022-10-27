@@ -79,3 +79,36 @@ root.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
 --------------------------------------------------------------------------------------
+redux more than one function
+
+reducers/updown.js
+const initialstate = 0;
+export const changenumber = (state = initialstate, action) => {
+  switch (action.type) {
+    case "INCREMENT":
+      return state + action.payload;
+    case "DECREMENT":
+      return state - 1;
+    default:
+      return state;
+  }
+};
+export const mynum = () => "My Num " + 6;
+
+or we can create another function named mynum.js inside reducers and write
+export const mynum = () => "My Num " + 6;
+
+-------------------------------------------------
+reducers/index.js
+import {changenumber, mynum} from "./updown"; // or separately import changenumber and mynum
+import { combineReducers } from "redux";
+const reducers = combineReducers({
+  changenumber,
+  mynum
+});
+export default reducers;
+-------------------------------------------------
+app.js
+const changenumber = useSelector((state) => state.changenumber);
+const mynum = useSelector((state) => state.mynum);
+----------------------------------------------------
