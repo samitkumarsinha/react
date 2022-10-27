@@ -111,4 +111,39 @@ export default reducers;
 app.js
 const changenumber = useSelector((state) => state.changenumber);
 const mynum = useSelector((state) => state.mynum);
-----------------------------------------------------
+------------------------------------------------------------------------------------
+fetch using redux
+updown.js
+const initialstate = 0;
+export const changenumber = (state = initialstate, action) => {
+  switch (action.type) {
+    case "INCREMENT":
+      return state + action.payload;
+    case "DECREMENT":
+      return state - 1;
+    default:
+      return state;
+  }
+};
+export const mynum = () => {
+  return fetch('https://jsonplaceholder.typicode.com/users').then(item => item.json())
+};
+------------------------------------------------
+test.js
+import { useState } from "react";
+import { useSelector } from "react-redux";
+
+export default function Test() {
+  const [val, setval]=useState([]);
+  const myrec = useSelector((state) => state.mynum);
+  myrec.then(item => {
+    setval(item);
+  })
+  const recs = val.map((item, key) => 
+      <div key = {key}>
+        <p>{item.name}</p>
+      </div>
+  )
+  return <>{recs}</>;
+}
+---------------------------------------------------------------------------
