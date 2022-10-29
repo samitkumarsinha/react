@@ -111,6 +111,14 @@ function App() {
 
 export default App;
 ----------------------------------
+store.js
+import { legacy_createStore as createStore, applyMiddleware} from 'redux'
+import reducers  from "./reducers/index";
+import thunk from "redux-thunk";
+const middleware = [thunk];
+const store = createStore(reducers, applyMiddleware(...middleware));
+export default store;
+----------------------------------
 index.js
 import React from "react";
 import ReactDOM from "react-dom/client";
