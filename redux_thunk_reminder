@@ -1,0 +1,135 @@
+actions/index.js
+export const getpostsbulkrequest = () => {
+  return {
+    type: "GET_POSTS_BULK_REQUEST",
+  };
+};
+export const getpostsbulksuccess = (data) => {
+  return {
+    type: "GET_POSTS_BULK_SUCCESS",
+    payload: data,
+  };
+};
+export const getpostsbulkfail = (e) => {
+  return {
+    type: "GET_POSTS_BULK_FAIL",
+    payload: e,
+  };
+};
+-----------------------------
+reducers/index.js
+import { myapi } from "./myapi";
+import { combineReducers } from "redux";
+const reducers = combineReducers({
+  myapi,
+});
+export default reducers;
+--------------------------------
+reducers/myapi.js
+const initialState = {
+  isLoading: false,
+  isLoaded: false,
+  error: null,
+  data: [],
+};
+export const myapi = (state = initialState, action) => {
+  switch (action.type) {
+    case "GET_POSTS_BULK_REQUEST":
+      return {
+        ...state,
+        isLoading: true,
+        isLoaded: false,
+        error: null,
+        data: [],
+      };
+    case "GET_POSTS_BULK_SUCCESS":
+      console.log(action);
+      return {
+        ...state,
+        isLoading: false,
+        isLoaded: true,
+        error: false,
+        data: action.payload,
+      };
+    case "GET_POSTS_BULK_FAIL":
+      return {
+        ...state,
+        isLoading: false,
+        isLoaded: false,
+        error: action.payload,
+        data: [],
+      };
+    default:
+      return state;
+  }
+};
+------------------------------------
+app.js
+import "./App.css";
+import {
+  getpostsbulkrequest,
+  getpostsbulksuccess,
+  getpostsbulkfail,
+} from "./actions";
+import { useSelector, useDispatch } from "react-redux";
+import store from "./store";
+const getPostBulk = async (dispatch, getstate) => {
+  if (!getstate.myapi.isLoaded) {
+    dispatch(getpostsbulkrequest);
+    try {
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/users"
+      );
+      const res = await response.json();
+      dispatch(getpostsbulksuccess(res));
+    } catch (e) {
+      dispatch(getpostsbulkfail(e));
+    }
+    console.log("2222", getstate.myapi);
+  }
+};
+function App() {
+  console.log(store.getState());
+  const { data, isLoading, isLoaded } = useSelector((state) => {
+    return { ...state.myapi };
+  });
+  const dispatch = useDispatch();
+  return (
+    <>
+      <button onClick={() => getPostBulk(dispatch, store.getState())}>
+        load api
+      </button>
+      {console.log(data, isLoading, isLoaded, "...............")}
+      {isLoaded ? (
+        data.map((post, key) => <p key={key}>{post.id}</p>)
+      ) : (
+        <p>Loading...</p>
+      )}
+    </>
+  );
+}
+
+export default App;
+----------------------------------
+index.js
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import store from "./store";
+import { Provider } from "react-redux";
+store.subscribe(() => console.log(store.getState()));
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
