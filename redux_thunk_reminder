@@ -81,7 +81,8 @@ const getPostBulk = async (dispatch, getstate) => {
         "https://jsonplaceholder.typicode.com/users"
       );
       if (response.status !== 200) {
-        throw new Error("Not 200 response");
+        // throw new Error("Not 200 response"); //you can use this also instead of next line
+        dispatch(getpostsbulkfail('Not 200 response'));
       } else {
         const res = await response.json();
         dispatch(getpostsbulksuccess(res));
