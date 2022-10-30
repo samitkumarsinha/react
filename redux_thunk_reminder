@@ -82,7 +82,7 @@ const getPostBulk = async (dispatch, getstate) => {
       );
       if (response.status !== 200) {
         // throw new Error("Not 200 response"); //you can use this also instead of next line
-        dispatch(getpostsbulkfail('Not 200 response'));
+        dispatch(getpostsbulkfail('Response Not 200,  response is ' + response.status));
       } else {
         const res = await response.json();
         dispatch(getpostsbulksuccess(res));
