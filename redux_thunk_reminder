@@ -73,6 +73,7 @@ import {
 } from "./actions";
 import { useSelector, useDispatch } from "react-redux";
 import store from "./store";
+import Mycomp from "./Mycomp";
 const getPostBulk = async (dispatch, getstate) => {
   if (!getstate.myapi.isLoaded) {
     dispatch(getpostsbulkrequest);
@@ -110,6 +111,7 @@ function App() {
       ) : (
         <p>Loading...</p>
       )}
+      <Mycomp/>
     </>
   );
 }
@@ -147,3 +149,24 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+-------------------------------------------------
+fetch store from other component
+import { useState } from "react";
+import store from "./store";
+
+export default function Mycomp() {
+  const [rec, setrec] = useState([]);
+  const getPostBulk = (store) => {
+    let data = store.getState();
+    setrec(data.myapi.data);
+  };
+  return (
+    <div>
+      <button onClick={() => getPostBulk(store)}>Load</button>
+      {rec.map((item, key) => {
+        return <p key={key}>{item.id}</p>;
+      })}
+    </div>
+  );
+}
+
