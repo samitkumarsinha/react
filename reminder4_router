@@ -138,4 +138,42 @@ class Test3 extends Component {
   }
 }
 export default withRouter(Test3);
---------------------------------------------
+-----------------------------------------------------------------------------------
+get querystring
+---------------------------------------------
+  <li>
+  <Link to="/home/test3?id=777&nm=sam">test3</Link>
+  </li>
+---------------------------------------------
+import React, { Component } from "react";
+import { useSearchParams } from "react-router-dom";
+export function withRouter(Children) {
+  return () => {
+    const [searchParams] = useSearchParams()
+    return <Children myparam={searchParams}/>;
+  };
+}
+class Test3 extends Component {
+  constructor(props) {
+    super(props);
+    console.log("");
+  }
+  render() {
+    console.log(this.props.myparam.get('id'))
+    console.log(this.props.myparam.get('nm'))
+    this.props.myparam.set('id','007')
+    console.log(this.props.myparam.get('id'))
+    console.log(this.props.myparam.get('nm'))
+
+
+    return (
+      <>
+        <div>
+          
+        </div>
+      </>
+    );
+  }
+}
+export default withRouter(Test3);
+---------------------------------------------------------------------------------------
