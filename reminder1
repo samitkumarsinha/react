@@ -1,5 +1,26 @@
+setstate
+-------------------------------------------------------------------------------------
+import React from "react";
+class Test1 extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { amt: 120 };
+  }
+  addamount() {
+    this.setState((state, props) => {
+      return { amt: state.amt + 1 };
+    });
+  }
+  render() {
+    return <div onClick={() => this.addamount()}>click{this.state.amt}</div>;
+  }
+}
+export default Test1;
+
+
+------------------------------------------------------------------------------------
 dataservice
---------------
+-------------------------------------------------------------------------------------
 import { useState, useEffect } from "react";
 const UserData = (url) => {
   const [data, setData] = useState([]);
