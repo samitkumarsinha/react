@@ -16,8 +16,6 @@ class Test1 extends React.Component {
   }
 }
 export default Test1;
-
-
 ------------------------------------------------------------------------------------
 remove element of an array using index 
 import React, {useState } from "react";
@@ -27,6 +25,7 @@ export default function Test1() {
   const removearr = (id) => {
     const arr = val.filter((item, index) => index !== id);
     setval(arr);
+    //setval(item => item.filter((item,index) => index !== id)); //in one line using state previous state
   };
   return (
     <>
