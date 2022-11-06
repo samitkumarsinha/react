@@ -19,6 +19,32 @@ export default Test1;
 
 
 ------------------------------------------------------------------------------------
+remove element of an array using index 
+import React, {useState } from "react";
+export default function Test1() {
+  let arr = [1, 2, 3, 4, 5];
+  let [val, setval] = useState(arr);
+  const removearr = (id) => {
+    const arr = val.filter((item, index) => index !== id);
+    setval(arr);
+  };
+  return (
+    <>
+      {console.log(val)}
+      {val.map((item, index) => {
+        return (
+          <div key={item.toString()}>
+            {item}
+            <span onClick={() => removearr(index)}>Remove</span>
+          </div>
+        );
+      })}
+    </>
+  );
+}
+
+
+------------------------------------------------------------------------------------
 dataservice
 -------------------------------------------------------------------------------------
 import { useState, useEffect } from "react";
