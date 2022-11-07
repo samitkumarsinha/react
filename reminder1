@@ -41,8 +41,22 @@ export default function Test1() {
     </>
   );
 }
-
-
+------------------------------------------------------------------------------------
+remove object from an array using id
+ const removearr = (id) => {
+    setval(item => item.filter((item,index) => item.id !== id));
+  };
+  
+  call
+  ------------
+     {val.map((item, index) => {
+        return (
+          <div key={item.id.toString()}>
+            {item.id}
+            <span onClick={() => removearr(item.id)}>Remove</span>
+          </div>
+        );
+      })}
 ------------------------------------------------------------------------------------
 dataservice
 -------------------------------------------------------------------------------------
