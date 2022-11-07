@@ -47,6 +47,7 @@ import React, {useState } from "react";
 import items from "./data";
 export default function Test1() {
   let [val, setval] = useState(items);
+  let [total, settotal] = useState(0);
   let arr = {
     id: 200,
     name: "Grape Juice 200",
@@ -58,6 +59,13 @@ export default function Test1() {
   const removearr = (id) => {
     setval(item => item.filter((item,index) => item.id !== id));
   };
+   const findtotal = () =>{
+    let sum =0;
+    val.forEach(item => {
+      sum += item.amount;
+      settotal(sum);
+    })
+  }
   const addarr = (obj) => {
     console.log(val)
     setval([...val, obj])
@@ -77,6 +85,7 @@ export default function Test1() {
         );
       })}
       <button onClick={() => addarr(arr)}>Add Item</button>
+      <p>total is {total}</p>
     </>
   );
 }
