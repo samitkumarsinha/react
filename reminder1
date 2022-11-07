@@ -42,14 +42,30 @@ export default function Test1() {
   );
 }
 ------------------------------------------------------------------------------------
-remove object from an array using id
- const removearr = (id) => {
+add and remove object from an object array
+import React, {useState } from "react";
+import items from "./data";
+export default function Test1() {
+  let [val, setval] = useState(items);
+  let arr = {
+    id: 200,
+    name: "Grape Juice 200",
+    amount: 200,
+    spendDate: "2020-10-20",
+    category: "Food 200",
+  }
+
+  const removearr = (id) => {
     setval(item => item.filter((item,index) => item.id !== id));
   };
-  
-  call
-  ------------
-     {val.map((item, index) => {
+  const addarr = (obj) => {
+    console.log(val)
+    setval([...val, obj])
+  }
+  return (
+    <>
+      {console.log(val)}
+      {val.map((item, index) => {
         return (
           <div key={item.id.toString()}>
             {item.id}
@@ -57,6 +73,12 @@ remove object from an array using id
           </div>
         );
       })}
+      <button onClick={() => addarr(arr)}>Add Item</button>
+    </>
+  );
+}
+
+ 
 ------------------------------------------------------------------------------------
 dataservice
 -------------------------------------------------------------------------------------
