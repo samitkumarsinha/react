@@ -61,6 +61,9 @@ export default function Test1() {
   const addarr = (obj) => {
     console.log(val)
     setval([...val, obj])
+    
+    //  val.push(obj) //another way
+    //  setval(val)
   }
   return (
     <>
