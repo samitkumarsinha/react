@@ -155,4 +155,40 @@ export default class B extends React.Component {
   }
 }
 ---------------------------------------------------------------------------
+setinterval start and stop
+
+import React, { useState } from "react";
+export default function Test1() {
+  const [val, setval] = useState(0);
+  const [timerid, settimerid] = useState(0);
+  const start = () => {
+    if (timerid) {
+      return;
+    }
+    const newtimerid = setInterval(() => {
+      setval((prev) => prev + 1);
+    }, 1000);
+    settimerid(newtimerid);
+  };
+  const stop = () => {
+    if (timerid) {
+      clearInterval(timerid);
+      settimerid(0);
+      setval(0);
+      return;
+    }
+  };
+  return (
+    <>
+      <div>
+        <button onClick={() => start()}>start</button>
+      </div>
+      <div>
+        <button onClick={() => stop()}>stop</button>
+      </div>
+      <div>{val}</div>
+    </>
+  );
+}
+-------------------------------------------------------------
 
