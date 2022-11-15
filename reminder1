@@ -518,3 +518,32 @@ export default class FormTest extends React.Component{
     }
 }
 --------------------------------------------------------------------------------
+proptype
+import React from "react";
+import PropTypes from "prop-types";
+function Test1(props) {
+  return (
+    <>
+      <div>{props.data.id}</div>
+      <div>{props.data.name}</div>
+      <div>{props.data1}</div>
+    </>
+  );
+}
+Test1.propTypes = {
+  data: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+  }),
+  data1: PropTypes.oneOf(['tt','mm','ram'])
+};
+export default function Test() {
+  let data = { id: 65, name: '88' };
+  let str = "ram"
+  return (
+    <div>
+      <Test1 data={data} data1={str} />
+    </div>
+  );
+}
+--------------------------------------------------------------------------------------------
