@@ -1,5 +1,58 @@
 setstate
 -------------------------------------------------------------------------------------
+add and subtract two numbers using function component
+import React from "react";
+import { useState } from "react";
+
+export default function Test() {
+  const [val, setval] = useState({});
+  const add = () => {
+    setval((item) => ({
+      ...item,
+      addition: parseInt(val.x) + parseInt(val.y),
+      type: "add",
+    }));
+    console.log(val);
+  };
+  const sub = () => {
+    setval((item) => ({
+      ...item,
+      subtraction: parseInt(val.x) - parseInt(val.y),
+      type: "sub",
+    }));
+    console.log(val);
+  };
+  const handlechange = (e) => {
+    setval((item) => ({ ...item, [e.target.name]: e.target.value }));
+  };
+  return (
+    <>
+      <div>
+        <p>
+          <input
+            type="text"
+            name="x"
+            onChange={(event) => handlechange(event)}
+          />
+        </p>
+        <p>
+          <input
+            type="text"
+            name="y"
+            onChange={(event) => handlechange(event)}
+          />
+        </p>
+        <p>
+          <button onClick={() => add()}>+</button>
+          <button onClick={() => sub()}>-</button>
+        </p>
+        <div>{val.type === "add" ? val.addition : val.subtraction}</div>
+      </div>
+    </>
+  );
+}
+
+-------------------------------------------------------------------------------------
 import React from "react";
 class Test1 extends React.Component {
   constructor(props) {
