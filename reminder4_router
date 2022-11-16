@@ -199,7 +199,7 @@ app.js
  contact.js
   <>
     <div>
-        <Link to="/contact/">Domestic</Link><br/>
+        <Link to="/contact/domestic">Domestic</Link><br/>
         <Link to="/contact/international">International</Link>
     </div>
     <div>
