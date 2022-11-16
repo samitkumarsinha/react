@@ -1,0 +1,58 @@
+Lifting State Up
+------------------
+test.js
+import React from 'react'
+import Addtodo from './addtodo'
+import Todocount from './todocount'
+import Todolist from './todolist'
+
+export default function Test() {
+    const [todos, setTodos] = React.useState(["item 1"]);
+  return (
+    <div>
+        <Addtodo setTodos={setTodos}/>
+        <Todolist todos={todos}/>
+        <Todocount todos={todos}/>
+    </div>
+  )
+}
+------------------
+todocount.js
+import React from 'react'
+
+export default function Todocount({todos}) {
+    return <div>Total Todos: {todos.length}</div>;
+}
+---------------------
+todolist.js
+import React from 'react'
+
+export default function Todolist({todos}) {
+    return (
+        <ul>
+          {todos.map((todo) => (
+            <li key={todo}>{todo}</li>
+          ))}
+        </ul>
+      );
+}
+---------------------------
+addtodo.js
+import React from 'react'
+
+export default function Addtodo({setTodos}) {
+    const handleSubmit = (event)=> {
+        event.preventDefault();
+        const todo = event.target.elements.todo.value;
+        console.log(todo)
+        setTodos(prevTodos => [...prevTodos, todo]);
+      }
+    
+      return (
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <input type="text" id="todo" />
+          <button type="submit">Add Todo</button>
+        </form>
+      );
+}
+---------------------------------------------------------------------------------------
