@@ -55,4 +55,7 @@ export default function Addtodo({setTodos}) {
         </form>
       );
 }
+---------------------
+for class components refer
+https://www.geeksforgeeks.org/lifting-state-up-in-reactjs/
 ---------------------------------------------------------------------------------------
