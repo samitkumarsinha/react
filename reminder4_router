@@ -177,3 +177,45 @@ class Test3 extends Component {
 }
 export default withRouter(Test3);
 ---------------------------------------------------------------------------------------
+open contact in new page (domestic and international inside contact)
+app.js
+<BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="about" element={<About />} />
+            <Route path="login" element={<Login />} />
+          </Route>
+        </Routes>
+        <Routes>
+          <Route path="/contact/" element={<Contact />}>
+            <Route path="domestic" element={<Domestic />} />
+            <Route path="international" element={<International />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+      
+ ------------------------------------
+ contact.js
+  <>
+    <div>
+        <Link to="/contact/">Domestic</Link><br/>
+        <Link to="/contact/international">International</Link>
+    </div>
+    <div>
+        <Outlet/>
+    </div>
+    </>
+    ----------------------------------
+    layout.js
+     <nav>
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="about">About</Link></li>
+          <li><Link to="contact">Contact</Link></li>
+          <li><Link to="login">Login</Link></li>
+        </ul>
+      </nav>
+    </div>
+    ---------------------------------------------------------------------------------
+    
