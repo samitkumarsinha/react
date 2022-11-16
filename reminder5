@@ -30,8 +30,8 @@ import React from 'react'
 export default function Todolist({todos}) {
     return (
         <ul>
-          {todos.map((todo) => (
-            <li key={todo}>{todo}</li>
+          {todos.map((todo, index) => (
+            <li key={index}>{todo}</li>
           ))}
         </ul>
       );
