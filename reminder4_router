@@ -189,6 +189,7 @@ app.js
         </Routes>
         <Routes>
           <Route path="/contact/" element={<Contact />}>
+            <Route index element={<Domestic />} />
             <Route path="domestic" element={<Domestic />} />
             <Route path="international" element={<International />} />
           </Route>
