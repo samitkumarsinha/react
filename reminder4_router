@@ -220,3 +220,19 @@ app.js
     </div>
     ---------------------------------------------------------------------------------
     
+to go to different page using link from function
+import { Link, Outlet, useNavigate } from 'react-router-dom'
+export default function Layout() {
+  const navigate = useNavigate();
+  const goto = () => {
+    navigate('/contact')
+  }
+  return (
+    <>
+    <div>
+    <p onClick={() => goto()}>Go to Contact</p>
+    </div>
+    </>
+    )
+    }
+    ----------------------------------------------------------
