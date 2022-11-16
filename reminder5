@@ -59,3 +59,31 @@ export default function Addtodo({setTodos}) {
 for class components refer
 https://www.geeksforgeeks.org/lifting-state-up-in-reactjs/
 ---------------------------------------------------------------------------------------
+another example
+test.js
+import React, { useState } from 'react'
+import Test1 from './test1'
+export default function Test() {
+    const [val,setval]=useState(0)
+  return (
+    <div>
+        <Test1 setv={setval}/>
+        <div>{val}</div>
+    </div>
+  )
+}
+-----------------------
+test1.js
+import React from 'react'
+
+export default function Test1({setv}) {
+    const hand=(e)=>{
+        setv(e.target.value)
+    }
+  return (
+    <div>
+        <input type="text" onChange={(e)=>hand(e)} />
+    </div>
+  )
+}
+--------------------------------------------------------------------------------------------------
