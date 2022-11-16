@@ -86,4 +86,37 @@ export default function Test1({setv}) {
     </div>
   )
 }
+---------------------------------
+another way (pass function as props from parent to child and call function from child and set data in parent
+test.js
+import React, { useState } from 'react'
+import Test1 from './test1'
+export default function Test() {
+    const [val,setval]=useState(0)
+    const sethere=(v)=>{
+        setval(v);
+    }
+  return (
+    <div>
+        <Test1 setv={sethere}/>
+        <div>{val}</div>
+    </div>
+  )
+}
+----------------------------
+test1.js
+import React from 'react'
+
+export default function Test1({setv}) {
+    const hand=(e)=>{
+        setv(e.target.value)
+    }
+  return (
+    <div>
+        <input type="text" onChange={(e)=>hand(e)} />
+    </div>
+  )
+}
+
 --------------------------------------------------------------------------------------------------
+
