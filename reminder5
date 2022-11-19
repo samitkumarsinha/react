@@ -119,4 +119,57 @@ export default function Test1({setv}) {
 }
 
 --------------------------------------------------------------------------------------------------
+create a color box using pass state
 
+parent
+color_pick.js
+import React, { useState } from "react";
+import Colorbox from "./color_box";
+import "../assets/css/color_box.css";
+export default function Colorpick() {
+  const color = ["#000000", "#ff0000", "#00ff00", "#0000ff"];
+  const [newcolor, setnewcolor] = useState("#ffffff");
+  return (
+    <div>
+      <div className="colorbox" style={{ backgroundColor: newcolor }}></div>
+      <div>
+        {color.map((item) => {
+          return (
+            <div key={item}>
+              <Colorbox colors={item} getnewcolor={setnewcolor} />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+---------------------------------------
+child
+color_box.js
+import "../assets/css/color_box.css";
+export default function Colorbox(props) {
+  return (
+    <>
+      <div
+        className="box"
+        style={{ backgroundColor: props.colors }}
+        onMouseMove={() => props.getnewcolor(props.colors)}
+      ></div>
+    </>
+  );
+}
+-----------------------------------------
+style
+color_box.css
+.box{
+    width: 40px;
+    height: 40px;
+}
+.colorbox{
+    width: 100px;
+    height: 50px;
+    border: thin solid black;
+    margin: 20px;
+}
+--------------------------------------------------------------------------------------------
